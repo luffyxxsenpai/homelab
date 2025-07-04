@@ -1,0 +1,23 @@
+services:
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    restart: unless-stopped
+    networks:
+      - pihole
+      - nginx
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - 8080:443
+
+    env_file:
+      - stack.env
+    volumes:
+      - /home/char/pihole/etc-pihole:/etc/pihole
+      - /home/char/pihole/etc-dnsmasq.d:/etc/dnsmasq.d
+networks:
+  pihole:
+    name: pihole
+  nginx:
+    external: true

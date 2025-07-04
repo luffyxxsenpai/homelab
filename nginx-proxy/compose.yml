@@ -1,0 +1,23 @@
+services:
+  nginx-proxy-manager:
+    image: 'docker.io/jc21/nginx-proxy-manager:latest'
+    restart: unless-stopped
+    container_name: nginx-proxy
+    networks:
+      - portainer
+      - nginx
+    ports:
+      - 80:80
+      - 81:81
+      - 443:443
+    env_file:
+      - stack.env
+    volumes:
+      - /home/char/nginx-proxy/data:/data
+      - /home/char/nginx-proxy/certs/:/etc/letsencrypt
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+networks:
+  portainer:
+    external: true
+  nginx:
+    external: true 

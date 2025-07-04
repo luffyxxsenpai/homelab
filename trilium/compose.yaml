@@ -1,0 +1,14 @@
+services:
+  trilium:
+    image: zadam/trilium
+    restart: always
+    environment:
+      - TRILIUM_DATA_DIR=/home/node/trilium-data
+    volumes:
+      - /mnt/data/docker/trilium:/home/node/trilium-data
+    networks:
+      - nginx 
+
+networks:
+  nginx:
+    external: true

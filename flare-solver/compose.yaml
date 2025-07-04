@@ -1,0 +1,18 @@
+services:
+  flaresolverr:
+    image: flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+    environment:
+      - LOG_LEVEL=info
+      - TZ=Asia/Kolkata
+    networks:
+      - media
+      - nginx
+    ports:
+      - 8191:8191
+    restart: unless-stopped
+networks:
+  media:
+    external: true
+  nginx:
+    external: true
